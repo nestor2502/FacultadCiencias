@@ -1,0 +1,1 @@
+Ruta donde se guardan todas las ideas para proyectos personales
