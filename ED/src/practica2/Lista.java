@@ -18,8 +18,10 @@ public class Lista<T> implements Iterable<T>{
 	public Nodo anterior;
 	
 	public Nodo(T elemento){
-	    // Aquí va su código.
+	    
+        this.elemento = elemento;
 	}
+
     }
 
 
@@ -37,20 +39,35 @@ public class Lista<T> implements Iterable<T>{
 
 	@Override
 	public boolean hasNext(){
-	    // Aquí va su código.
-	}
+         
+         return (siguente!=null);
+	    
+	 }
 	
-	@Override
-	public T next(){
-	    // Aquí va su código.
-	}
+     /**
+     *Regresa el siguiente elemento en la iteracion
+     */
+	 @Override
+	 public T next() throws NoSuchElementException{
+
+        if(siguiente == null){
+            
+         throw new NoSuchElementException();
+
+         }
+
+            else
+
+             return elemento;
+	    
+    }
     }
 //////////////////////////////////////////////////////////////////////////
 
 
     private Nodo cabeza;
     private Nodo ultimo;
-    private int longitud;
+    private int longitud=0;
     
     /**
     *Constructor vacio
@@ -64,7 +81,14 @@ public class Lista<T> implements Iterable<T>{
     *Constructor que toma un arreglo y mete sus elementos a la lista 
     */
     public Lista(T[] arreglo){
-	// Aquí va su código.
+
+    int longitud = arreglo.length;
+
+    Nodo n1 = new 
+
+
+
+	
     }
     
 
@@ -90,6 +114,7 @@ public class Lista<T> implements Iterable<T>{
     */
     //debe lanzar NoSuchElementException
     public T eliminaPrimero(){
+        throw NoSuchElementException;
 	// Aquí va su código.
     }
     
@@ -218,6 +243,8 @@ public class Lista<T> implements Iterable<T>{
     */
     @Override
     public Iterator<T> iterator(){
-	// Aquí va su código.
+	
+    return new Iterador();
+
     }
 }
