@@ -56,10 +56,14 @@ public class Lista<T> implements Iterable<T>{
 
          }
 
-            else
+            else{
+
+
+
 
              return elemento;
-	    
+             
+             }	    
     }
     }
 //////////////////////////////////////////////////////////////////////////
@@ -73,7 +77,10 @@ public class Lista<T> implements Iterable<T>{
     *Constructor vacio
     */
     public Lista(){
-	// Aquí va su código.
+
+	cabeza = null;
+    ultimo = null;
+
     }
 
 
@@ -82,14 +89,11 @@ public class Lista<T> implements Iterable<T>{
     */
     public Lista(T[] arreglo){
 
-    int longitud = arreglo.length;
+         int longitud = arreglo.length;
 
-    Nodo n1 = new 
-
-
-
+         Nodo n1 = new 
 	
-    }
+     }
     
 
     /**
@@ -97,34 +101,93 @@ public class Lista<T> implements Iterable<T>{
     */
     //si la lista es vacía, deben lanzar una NoSuchElementException.
     public T getPrimero(){
-	// Aquí va su código.
-    }
+	
+         return cabeza;
+
+     }
+
 
     /**
     *Regresa el ultimo elemento de la lista, 
     */
     //si la lista es vacía, deben lanzar una NoSuchElementException.
     public T getUltimo(){
-        // Aquí va su código.
-    }
+        
+         return ultimo;
+
+     }
     
 
     /**
     *Elimina el primer elemento de la lista, si la lista es vacia 
+    *@throws NoSuchElementException 
     */
     //debe lanzar NoSuchElementException
-    public T eliminaPrimero(){
-        throw NoSuchElementException;
-	// Aquí va su código.
-    }
+    public T eliminaPrimero() throws NoSuchElementException{
+
+         if(longitud == 0){
+
+             throw new NoSuchElementException;
+             }
+
+         if(longitud != 0 && longitud > 1){
+
+             Nodo temp = new Nodo(cabeza.elemento);
+
+             temp.anterior = cabeza.anterior;
+             temp.siguiente = cabeza.siguiente;
+             //hay que verificar lo que esta pasando aqui///////
+             cabeza = cabeza.siguiente;
+             }
+
+         if(longitud == 1){
+             
+             Nodo temp = new Nodo(cabeza.elemento);
+
+             }
+
+	     if (longitud > 0)
+
+             return cabeza;
+     }
     
 
     /**
     *Elimina el ultimo elemento de la lista, si la lista es vacia 
+    *@throws NoSuchElementException
     */
     //debe lanzar NoSuchElementException
-    public T eliminaUltimo(){
-	// Aquí va su código.
+    public T eliminaUltimo() throws NoSuchElementException{
+
+         if(longitud==0)
+
+             throw new NoSuchElementException;
+
+         if(longitud != 0 && longitud > 1){
+
+             Nodo temp2 = new Nodo(ultimo.elemento);
+
+             temp2.anterior = ultimo.anterior;
+
+             temp2.siguiente = ultimo.siguiente;
+             //hay que verificar lo que esta pasando aqui///////
+             ultimo = ultimo.anterior;
+
+             }
+
+         if(longitud == 1){
+
+             Nodo temp2 = new Nodo(ultimo.elemento);
+           
+             temp.anterior = null;
+
+             temp.siguiente = null;
+
+             }
+         if (longitud > 0)
+
+             return cabeza;
+	
     }
     
 
@@ -132,7 +195,15 @@ public class Lista<T> implements Iterable<T>{
     *Recibe un elemento y lo agrega al inicio de la lista
     */
     public void agregaInicio(T t){
-	// Aquí va su código.
+
+         Nodo nuevoElemento = new Nodo(t);
+
+         nuevoElemento.siguiente = cabeza.siguiente;
+
+          = 
+	
+         
+
     }
     
 
@@ -145,19 +216,25 @@ public class Lista<T> implements Iterable<T>{
     
 
     /**
-    *Recibe un elemento, si el elemto se encuentra en la lista devuelve true
+    *Recibe un elemento, si el elemento se encuentra en la lista devuelve true
     *si no false 
     */
     public boolean contiene(T t){
-	// Aquí va su código.
+
+        for {}
+
+	
     }
     
 
     /**
     *regresa la longitud de la lista
+    *@return longitud 
     */
     public int getLongitud(){
-	// Aquí va su código.
+
+	     return longitud;
+
     }
     
 
@@ -174,7 +251,10 @@ public class Lista<T> implements Iterable<T>{
     *Vacía la lista
     */
     public void limpia(){
-	// Aquí va su código.
+
+	cabeza = null;
+    ultimo = null;
+
     }
     
 
