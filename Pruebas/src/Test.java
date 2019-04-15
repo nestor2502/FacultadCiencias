@@ -14,8 +14,10 @@ public static void main(String [] args){
 		ryb.agrega(25);
 		//ryb.agrega(48);
 		//ryb.agrega(24);
-        
-		ryb.bfs(i -> System.out.println(i));
+        //ryb.bfs( i -> System.out.println(i));
+		//ryb.dfs(1, i -> System.out.println(i));
+		ryb.dfs(2, i -> System.out.println(i));
+		//ryb.dfs(3, i -> System.out.println(i));
 	
 
 

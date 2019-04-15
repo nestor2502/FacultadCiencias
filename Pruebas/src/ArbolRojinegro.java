@@ -418,6 +418,65 @@ public class ArbolRojinegro <T extends Comparable<T>>{
     }
 
 
+    public void dfs(int tipo, Consumer<T> funcion) throws IllegalArgumentException{
+	       
+        switch(tipo){
+
+             case 1: preOrden(funcion, raiz);
+ 
+                 break;
+
+             case 2: inOrden(funcion, raiz);
+
+                 break; 
+
+             case 3:  postOrden(funcion, raiz); 
+
+                  break; 
+
+             default: throw new IllegalArgumentException(); 
+        }
+
+
+    }
+
+    public void preOrden(Consumer<T> funcion, VerticeRojinegro x ){
+
+
+        
+         if(x != null) {
+             funcion.accept(x.elemento);
+             preOrden(funcion, x.izquierdo);
+             preOrden(funcion, x.derecho);
+    }
+
+
+
+
+    }
+
+    public void inOrden(Consumer<T> funcion, VerticeRojinegro x ){
+
+         if(x != null) {
+         inOrden(funcion , x.izquierdo);
+         funcion.accept(x.elemento);
+         inOrden(funcion, x.derecho);
+         
+    }
+
+
+    }
+
+    public void postOrden(Consumer<T> funcion, VerticeRojinegro x){
+
+         if(x != null) {
+         postOrden(funcion, x.izquierdo);
+         postOrden(funcion, x.derecho);
+         funcion.accept(x.elemento);
+    }
+    }
+
+
 
 
 	      
