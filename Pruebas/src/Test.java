@@ -19,6 +19,9 @@ public static void main(String [] args){
 		ryb.agrega(74);
         ryb.agrega(73);
         ryb.agrega(65);
+        //ryb.agrega("hola");
+        //ryb.agrega("como");
+        //ryb.agrega("estas");
 		ryb.bfs( i -> System.out.println(i));
 	
 		//ryb.dfs(1, i -> System.out.println(i));
