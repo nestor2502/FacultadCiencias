@@ -10,12 +10,14 @@ public class Visualizar implements ActionListener{
      public JFrame ventana2;
      public JFrame ventana3;
      public JTextField frase, ruta;
-     public JLabel etiqueta, etiqueta1, etiqueta2, etiqueta3, etiqueta4;
+     public JLabel etiqueta, etiqueta1, etiqueta2, etiqueta3, etiqueta4, etiqueta5;
      public JButton ingresar;
      public JButton anadir, anadir2, regresa1, regresa2;
      public JButton mostrar;
      public JButton limpiar;
      public String fraseIng="";
+     public JTable ingresados;
+     public JComboBox ingresados2, importancia;
 
 
 
@@ -66,6 +68,15 @@ public class Visualizar implements ActionListener{
       	  etiqueta.setText("Documentos ingresados");
           etiqueta.setBounds(30, 180, 400, 40);
           ventana1.add(etiqueta);
+          
+          //String []titulos = {"nestor"};
+          ingresados2 = new JComboBox();
+          ingresados2.setBounds(30, 230, 400, 40);
+          ingresados2.addItem("Doc1");
+          ingresados2.addItem("Doc2");
+          ingresados2.addItem("Doc3");
+          ingresados2.addItem("Doc4");
+          ventana1.add(ingresados2);
 
           etiqueta4 = new JLabel();
           etiqueta4.setText("Documentos ingresados");
@@ -122,6 +133,7 @@ public class Visualizar implements ActionListener{
 
      public void iniciaComponentes3(){
 
+
      	 String frase3 = fraseIng;
      	 System.out.println(fraseIng);
 
@@ -142,6 +154,15 @@ public class Visualizar implements ActionListener{
 	 	 etiqueta3 = new JLabel();
 	 	 etiqueta3.setBounds(20, 60, 250, 40);
 	 	 ventana3.add(etiqueta3);
+
+	 	 etiqueta5 = new JLabel();
+	 	 etiqueta5.setText("Orden de importancia: ");
+	 	 etiqueta5.setBounds(20, 100, 250, 40);
+	 	 ventana3.add(etiqueta5);
+
+	 	 importancia = new JComboBox();
+	 	 importancia.setBounds(20, 156, 260, 40);
+	 	 ventana3.add(importancia);
 
 	 	 regresa2 = new JButton("Regresar");
 	 	 regresa2.setBounds(85, 230, 120, 40);
