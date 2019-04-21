@@ -143,18 +143,29 @@ public class ArbolRojinegro <T extends Comparable<T>>{
 		if(aux == raiz) {
 			raiz = null;
 			elementos--;
-			eliminado = true;
-////			//return true;
+            //balanceado = fantasma;
+			//eliminado = true;
+           return true;
 		}
 		
-		if(aux.padre.izquierdo == aux)
+		if(aux.padre.izquierdo == aux){
+            fantasma.padre = aux.padre;
+            balanceado = fantasma;
+            if(sustututo.color == Color.NEGRO && balanceado.color == Color.NEGRO)   
+               rebalanceo2(balanceado);
 			aux.padre.izquierdo = null;
-		else
-			aux.padre.derecho = null;
-		  eliminado = true;
-////		//return true;
+        }
+		else{
+            fantasma.padre = aux.padre;
+			aux.padre.derecho = fantasma;
+            balanceado = fantasma;
+            if(sustututo.color == Color.NEGRO && balanceado.color == Color.NEGRO)   
+                 rebalanceo2(balanceado);
+            aux.padre.derecho = null;
+		   // eliminado = true;}
+            return true;
 	
-	}
+	}}
 //-------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------
 //Tiene un nodo hijo
@@ -164,29 +175,57 @@ public class ArbolRojinegro <T extends Comparable<T>>{
 		//balanceado = aux.izquierdo;
 		if(aux == raiz) { //Caso especial
 			raiz = raiz.izquierdo;
-			balanceado = raiz;
+            if (raiz.izquierdo == null){
+               fantasma.padre = raiz;
+               raiz.izquierdo = fantasma;}
+			balanceado = raiz.izquierdo;
+            if(sustututo.color == Color.NEGRO && balanceado.color == Color.NEGRO)   
+                 rebalanceo2(balanceado);////////////////Listo
+             if(raiz.izquierdo.elemento == null)
+             raiz.izquierdo = null;
 			elementos--;
-////			return true;
-			eliminado = true;
+		return true;
+			//eliminado = true;
 		}
 		
 		if(aux.padre.derecho == aux) {
 
 		aux.izquierdo.padre =aux.padre;
 		aux.padre.derecho = aux.izquierdo;
-		balanceado = aux.izquierdo;
-		}else {
+        //Se crea comodin
+        if(aux.izquierdo.izquierdo == null){//////////falta checar el caso de aux.izquierdo.derecho
+            fantasma.padre = aux.izquierdo;
+            aux.izquierdo.izquierdo = fantasma;
+        }
+		balanceado = aux.izquierdo.izquierdo;
+        if(sustututo.color == Color.NEGRO && balanceado.color == Color.NEGRO)   
+                 rebalanceo2(balanceado);////////////////Listo
+         if(aux.izquierdo.izquierdo.elemento == null){
+            aux.izquierdo.izquierdo= null;
+         }
+		}
+        else if(aux.padre.izquierdo == aux){
 		aux.izquierdo.padre = aux.padre;
 		aux.padre.izquierdo = aux.izquierdo;
-		balanceado = aux.izquierdo;
+        //se crea comodin
+        if(aux.izquierdo.izquierdo == null){
+              fantasma.padre = aux.izquierdo;
+            aux.izquierdo.izquierdo = fantasma;
+        }
+		balanceado = aux.izquierdo.izquierdo;
+         if(sustututo.color == Color.NEGRO && balanceado.color == Color.NEGRO)   
+                 rebalanceo2(balanceado);////////////////Listo
+         if(aux.izquierdo.izquierdo.elemento == null){
+            aux.izquierdo.izquierdo = null;
+         }
 		
 		}
 //		aux.elemento = aux.izquierdo.elemento;
 //		aux.izquierdo.padre = aux.padre;
 //		aux.izquierdo = null;
 		elementos--;
-////		return true;
-		eliminado = true;
+		return true;
+		//eliminado = true;
 
 	
      
@@ -197,30 +236,68 @@ public class ArbolRojinegro <T extends Comparable<T>>{
 		//balanceado = aux.derecho;
 		if(aux == raiz) {	//Caso especial
 			raiz = raiz.derecho;
-			balanceado = raiz;
+            //se crea comodin 
+            if(raiz.derecho == null){
+                fantasma.padre= raiz;
+                raiz.derecho = fantasma;
+            }
+			balanceado = raiz.derecho;
+            if(sustututo.color == Color.NEGRO && balanceado.color == Color.NEGRO)   
+                 rebalanceo2(balanceado);///////////Listo
+             if(raiz.derecho.elemento== null){
+                raiz.derecho= null;
+             }
 			elementos--;
-///			return true;
-			eliminado = true;
+			return true;
+			//eliminado = true;
 		}
+
 		if(aux.padre.derecho == aux) {
 		aux.derecho.padre =aux.padre;
 		aux.padre.derecho = aux.derecho;
-		balanceado = aux.derecho;
-		}else {
+        //se crea comidin
+        if(aux.derecho.derecho == null){
+            fantasma.padre = aux.derecho;
+            aux.derecho.derecho = fantasma;
+            //balanceado = fantasma;
+        }
+		balanceado = aux.derecho.derecho;
+         if(sustututo.color == Color.NEGRO && balanceado.color == Color.NEGRO)   
+                 rebalanceo2(balanceado);////////////////Listo  
+
+        //eliminando comodin
+             if(aux.derecho.derecho.elemento == null)
+                aux.derecho.derecho= null;
+		}
+
+        else if(aux.padre.izquierdo == aux) {
 		aux.derecho.padre = aux.padre;
 		aux.padre.izquierdo = aux.derecho;
-		balanceado = aux.derecho;
+        //se crea comodin
+        if(aux.derecho.derecho== null){
+             fantasma.padre = aux.derecho;
+             aux.derecho.derecho = fantasma;
+        }
+		balanceado = aux.derecho.derecho;
+        if(sustututo.color == Color.NEGRO && balanceado.color == Color.NEGRO)   
+                 rebalanceo2(balanceado);////////////////Listo  
+        //eliminando comodin
+        if(aux.derecho.derecho.elemento == null)
+            aux.derecho.derecho = null;
 		
 		}
 //		aux.elemento = aux.derecho.elemento;
 //		aux.derecho.padre = aux.padre;
 //		aux.derecho = null;
 		elementos--;
-////		return true;
-		eliminado = true;
+		return true;
+		//eliminado = true;
 
 	}
 //--------------------------------------------------------------------
+
+
+
 	//Caso tiene 2 hijos
 	VerticeRojinegro predecesor= new VerticeRojinegro (null);
 	if(aux.izquierdo != null && aux.derecho != null) {
@@ -228,7 +305,7 @@ public class ArbolRojinegro <T extends Comparable<T>>{
 		//balanceado = predecesor;
 //Caso raiz(especial)		
 		if(aux == raiz) { //Se borra la raiz
-			if(predecesor == raiz.izquierdo){ //Caso donde el predecesor esta a la ziquierda de la raiz
+			if(predecesor == raiz.izquierdo){ //Caso donde el predecesor esta a la izquierda de la raiz
 				raiz.izquierdo = null;
 				raiz.elemento = predecesor.elemento;
 				balanceado = raiz;
@@ -260,9 +337,13 @@ public class ArbolRojinegro <T extends Comparable<T>>{
               balanceado = fantasma;        
 
 	     }
-     if(sustututo.color == Color.NEGRO && balanceado.color == Color.NEGRO)	
-	      rebalanceo2(balanceado);
+    //if(sustututo.color == Color.NEGRO && balanceado.color == Color.NEGRO)	
+	  //    rebalanceo2(balanceado);
 	return eliminado;
+
+
+
+
      }
 
      public void conectaIzquierda(VerticeRojinegro padre, VerticeRojinegro hijo){ 
@@ -519,7 +600,7 @@ public class ArbolRojinegro <T extends Comparable<T>>{
       	 /////Pendiente actualizar referencias
      //Caso 3
 
-     if(p.color ==Color.NEGRO&& h.color ==Color.NEGRO&&todoNegro1 == true && todoNegro2== true){
+     if(p.color ==Color.NEGRO&& h.color ==Color.NEGRO&&hi.color  == Color.NEGRO && hd.color== Color.NEGRO){
          
          h.color = Color.ROJO;
          rebalanceo2(p);
@@ -527,8 +608,8 @@ public class ArbolRojinegro <T extends Comparable<T>>{
      }
      //Caso 4
 
-     if(p.color == Color.ROJO && h.color == Color.NEGRO && todoNegro1 == true && todoNegro2== true ){
-
+     if(p.color == Color.ROJO && h.color == Color.NEGRO)//&& (hi.color == Color.NEGRO || hi==null) && (hd.color== Color.NEGRO || hd ==null)){
+        {//En esta parte puse de color negro a los hijos pero puede ser que se necesite
      	 h.color = Color.ROJO;
      	 p.color = Color.NEGRO;
      	 return;
@@ -541,15 +622,15 @@ public class ArbolRojinegro <T extends Comparable<T>>{
        	     direccionV = 1;
        if(v.padre.derecho == v)
        	     direccionV =2;
-     if((direccionV == 1 && todoRojo1==true && todoNegro2 == true)||(direccionV==2 && todoNegro1==  true &&todoRojo2==true )){
+     if((direccionV == 1 && hi.color==Color.ROJO && hd.color == Color.NEGRO)||(direccionV==2 && hi.color==Color.NEGRO &&hd.color==Color.ROJO)){
 
 
      	  h.color = Color.ROJO;
 
-     	  if(todoRojo1 == true)
+     	  if(hi.color == Color.ROJO)
      	  	hi.color = Color.NEGRO;
 
-     	  if(todoRojo2 == true)
+     	  if(hd.color == Color.ROJO)
      	  	 hd.color = Color.NEGRO;
 
      	 if(direccionV == 1)
@@ -560,7 +641,7 @@ public class ArbolRojinegro <T extends Comparable<T>>{
      	 	 //hi = temp;
 
 
-     	 if(direccionV == 1)
+     	 if(direccionV == 2)
      	 	 giraIzquierda(h);
      	 	 //temp = h;
      	 	 //h= hd;
@@ -584,7 +665,7 @@ public class ArbolRojinegro <T extends Comparable<T>>{
        	     direccionV = 1;
        if(v.padre.derecho == v)
        	     direccionV =2;
-     if((direccionV == 1 && todoRojo2 == true)|| (direccionV == 2 &&  todoRojo1 == true)){
+     if((direccionV == 1 && hd.color == Color.ROJO)|| (direccionV == 2 && hi.color == Color.ROJO)){
 
 
          h.color = p.color;

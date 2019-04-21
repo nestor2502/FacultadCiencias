@@ -30,7 +30,7 @@ public static void main(String [] args){
         System.out.println();
         System.out.println();
         System.out.println();
-        System.out.println("se eliminó ? "+ryb.elimina(75));
+        System.out.println("se eliminó ? "+ryb.elimina(45));
         ryb.bfs( i -> System.out.println(i));
         //ryb.dfs(1, i -> System.out.println(i));
 	
