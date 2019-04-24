@@ -116,7 +116,34 @@ public class ArbolRojinegro <T extends Comparable<T>>{
 	     return balanceado;
      }
 
+     public void balancea(VerticeRojinegro eliminar, VerticeRojinegro sustituto, VerticeRojinegro hsustituto){
+         VerticeRojinegro fantasma;
+         VerticeRojinegro hsustituto;
 
+        if(eliminar.derecho== null && eliminar.izquierdo== null){
+
+              fantasma = new VerticeRojinegro(null);
+              fantasma.color = Color.NEGRO;
+              fantasma.padre = eliminar.padre;
+              sustituto = fantasma;
+              hsustituto= fantasma;
+          }
+
+         if(sustituto.color == Color.Rojo && eliminar.color == Color.NEGRO){
+              
+              sustituto.color = Color.NEGRO;
+          }
+
+         if(eliminar.color = Color.ROJO && sustituto.color == Color.NEGRO){
+
+             return;
+         }
+
+         if(eliminar.color == Color.NEGRO && sustituto.color == Color.NEGRO){
+
+             rebalanceo2(hsustituto);
+         }
+     }
 
      public boolean elimina(T j) {
      	//VerticeRojinegro eliminado = new VerticeRojinegro(null);
