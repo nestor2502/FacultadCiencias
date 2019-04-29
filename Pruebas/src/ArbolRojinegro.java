@@ -38,7 +38,7 @@ public class ArbolRojinegro <T extends Comparable<T>>{
     */
     public ArbolRojinegro(T[] a){
 	  
-         elementos = a.length;
+        // elementos = a.length;
          for(int i=0;i<a.length;i++) {
              agrega(a[i]);
          }  
@@ -48,6 +48,7 @@ public class ArbolRojinegro <T extends Comparable<T>>{
 
   
     public void agrega(T elemento){
+
     	 VerticeRojinegro nuevo = new VerticeRojinegro(elemento);
 
          if(raiz == null) {
@@ -86,11 +87,11 @@ public class ArbolRojinegro <T extends Comparable<T>>{
         
          }
          //VerticeRojinegro nes = (VerticeRojinegro )buscaVertice(elemento);
-      rebalanceo1(nuevo);
       elementos++;
+      rebalanceo1(nuevo);
 	
     }
-
+    /**
      public VerticeRojinegro getSustituto(VerticeRojinegro v){
 
      	 VerticeRojinegro fantasma = new VerticeRojinegro(null);
@@ -371,7 +372,7 @@ public class ArbolRojinegro <T extends Comparable<T>>{
 
 
 
-     }
+     }*/
 
      public void conectaIzquierda(VerticeRojinegro padre, VerticeRojinegro hijo){ 
               
@@ -769,18 +770,21 @@ public class ArbolRojinegro <T extends Comparable<T>>{
 
      public void bfs2(Consumer<T> funcion, VerticeRojinegro x){
 
-    	 Queue<VerticeRojinegro> cola = new LinkedList<VerticeRojinegro>();
-	     cola.add(x);
+    	 //Queue<VerticeRojinegro> cola = new LinkedList<VerticeRojinegro>();
+	     //cola.add(x);
+
+         Cola <VerticeRojinegro> cola2 = new Cola<VerticeRojinegro>();
+         cola2.mete(x);
 	
-	     while(!cola.isEmpty()) {
-		 VerticeRojinegro vertice = cola.remove();
+	     while(!cola2.esVacia()) {
+		 VerticeRojinegro vertice = cola2.saca();
 		 funcion.accept(vertice.elemento);
 		 if(vertice.izquierdo != null) {
-			 cola.add(vertice.izquierdo);
+			 cola2.mete(vertice.izquierdo);
 		 }
 		
 		 if(vertice.derecho != null) {
-			 cola.add(vertice.derecho);
+			 cola2.mete(vertice.derecho);
 		 }
 	}
 	     
@@ -863,6 +867,45 @@ public class ArbolRojinegro <T extends Comparable<T>>{
 	return null;
 
 }
+
+      public T buscaVertice2(T x){
+         VerticeRojinegro otroNodo = raiz; 
+         VerticeRojinegro buscado = new VerticeRojinegro(x); 
+    
+         while(otroNodo != null){
+             if(x.compareTo(otroNodo.elemento)==0) {
+                 return otroNodo.elemento;
+             }
+             else if(x.compareTo(otroNodo.elemento) <= 0) {
+                 otroNodo = otroNodo.izquierdo;
+                 
+             }
+             else {
+                 otroNodo = otroNodo.derecho;
+                 
+             }
+         }
+    
+    return null;
+
+}    public boolean existeVertice(T x){
+         VerticeRojinegro otroNodo = raiz;  
+    
+         while(otroNodo != null){
+             if(x.compareTo(otroNodo.elemento)==0) {
+                 return true;
+             }
+             else if(x.compareTo(otroNodo.elemento) <= 0) {
+                 otroNodo = otroNodo.izquierdo;
+             }
+             else {
+                 otroNodo = otroNodo.derecho;
+             }
+         }
+    
+    return false;
+
+}
      
       public VerticeRojinegro predecesor(T y) {
 	      VerticeRojinegro encontrado = buscaVertice(y);
@@ -939,6 +982,10 @@ public class ArbolRojinegro <T extends Comparable<T>>{
 		}
 	}
 	return false;
+}
+
+public int noElementos(){
+    return elementos;
 }
 
 

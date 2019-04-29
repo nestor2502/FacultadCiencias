@@ -1,10 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Proyecto2;
+
+import src.*;
 import java.awt.Font;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.util.Iterator;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -13,6 +18,15 @@ import java.awt.Font;
 public class Ventana1 extends javax.swing.JFrame {
     
     public String frase2="";
+    ManejoDocumentos m2;
+    Lista <String> rutas;
+    int seleccion;
+    int cont =0;
+    int noDocumentos=0;
+    int noDocumentos2=0;
+    int i=0;
+    Ventana3 v3;
+    int agrego =0;
 
     /**
      * Creates new form Ventana1
@@ -24,6 +38,9 @@ public class Ventana1 extends javax.swing.JFrame {
         this.setTitle("Proyecto 2");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLayout(null);
+        v3 = new Ventana3();
+         ingresados.removeAllItems();
+         rutas = new Lista<String>();
         
         
         
@@ -31,6 +48,10 @@ public class Ventana1 extends javax.swing.JFrame {
      TextPrompt placeholder = new TextPrompt("Ingresa una frase", frase);
      placeholder.changeAlpha(0.75f);
          placeholder.changeStyle(Font.ITALIC);
+         
+          TextPrompt place = new TextPrompt("c :/. . . / . . . / . . . ", rutaDoc);
+     place.changeAlpha(0.75f);
+         place.changeStyle(Font.ITALIC);
     }
     
 
@@ -54,6 +75,8 @@ public class Ventana1 extends javax.swing.JFrame {
         ingresados = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        rutaDoc = new javax.swing.JTextField();
+       // jButton3 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -113,6 +136,14 @@ public class Ventana1 extends javax.swing.JFrame {
             }
         });
 
+        rutaDoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rutaDocActionPerformed(evt);
+            }
+        });
+
+        
+
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
@@ -121,47 +152,68 @@ public class Ventana1 extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLayout.createSequentialGroup()
+                        .addComponent(rutaDoc)
+                        .addGap(18, 18, 18)
+                        .addComponent(documento, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addComponent(ingresados, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addComponent(frase)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ingresar1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20))
+                    .addGroup(panelLayout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(ingresados, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(120, Short.MAX_VALUE))
                     .addGroup(panelLayout.createSequentialGroup()
-                        .addComponent(frase, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(ingresar1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(documento, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(75, Short.MAX_VALUE))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+
+                        .addGap(68, 68, 68))))
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(frase, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ingresar1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addComponent(documento, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(frase, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ingresar1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(documento, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addComponent(rutaDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(11, 11, 11)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
+                        .addContainerGap()
+                       // .addComponent(jButton3)
+                        .addGap(8, 8, 8)))
                 .addComponent(ingresados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -175,41 +227,124 @@ public class Ventana1 extends javax.swing.JFrame {
          
          if(frase.getText().equals("")==false){
          frase.setEnabled(false);
+         String buscando = frase.getText();
          frase2 = frase.getText();
-         ingresar1.setEnabled(false);}
+         m2 = new ManejoDocumentos(frase2);
+         ingresar1.setEnabled(false);
+         //ingresados.addItem(frase.getText());
+         }
          
          
     }                                         
 
-    private void ingresadosActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
-    }                                          
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {  
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+        //Ventana4 v4 = new Ventana4();
+        //v4.setVisible(true);
         frase2="";
         frase.setText("");
         frase.setEnabled(true);
         ingresar1.setEnabled(true);
+        ingresados.removeAllItems();
+        //seleccion = v4.getSeleccion();
+        
     }                                        
 
-    private void documentoActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        // TODO add your handling code here:
-        String ruta = "";
-        Ventana2 v2= new Ventana2();
-        v2.setVisible(true);
-        ruta = v2.getRuta();
+    private void documentoActionPerformed(java.awt.event.ActionEvent evt) {   
+     String rutam = rutaDoc.getText().trim();                                       
+        if(rutas.contiene(rutam)==false){
+        //cont =0;
+        if(rutaDoc.getText().equals("")==false ){//|| rutaDoc.getText()!= " "){
+       // String rutam = rutaDoc.getText().trim();
+        try {
+             BufferedReader lector = new BufferedReader(new FileReader(rutam));
+             
+             lector.close();
+             
+             agregarDocumento(rutam);
+             
+         }
+
+         catch(FileNotFoundException e){//No encontro el documento
+
+             JOptionPane.showMessageDialog(null, "No se encontro el documento");
         
-        
+         }catch(IOException e){//Errores varios
+
+             JOptionPane.showMessageDialog(null, "Hubo algun problema");
+    }
+     
+        }}
+    
     }                                         
+    public void agregarDocumento(String documento){
+         if(rutas.contiene(documento)==false){
+         m2.agregaDocumento(documento);
+         rutas.agregaInicio(documento);
+         ingresados.addItem(documento);
+         rutaDoc.setText("");
+         noDocumentos++;
+         cont++;
+         agrego=0;
+         ;}
+         
+        
+    }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-          Ventana3 v3 = new Ventana3();
-        if(frase.getText().equals("")== false)
+       // Iterator <String> iterator = rutas.iterator();
+        //if(frase.getText().equals("")== false){
+        //while(iterator.hasNext()==true){
+          //   m2.agregaDocumento(iterator.next());
+             //System.out.println(iterator.next());
+            // System.out.println();
+        //}
+        
+        if(i==0){
+        cont=noDocumentos;
+        i++;
+         }
+        setSimilitud();
+        agrego++;
+         //m2.calculaSimilitud();
+         //m2.ordenaDocumentos();
+
+         //String [] a1= m2.getOrdenados();
+         //for(int i =0; i< a1.length;i++){
+           //   System.out.println(a1[i]);
+         //}
+       
+
+
+    }
+
+    public void setSimilitud(){
+        String [] a1= new String[0];;
+        if(agrego==0 ){
+             m2.calculaSimilitud();
+             m2.ordenaDocumentos();
+             m2.pruebaSim();
+             a1= m2.getOrdenados();
+             v3.setOrdenados(a1);  
+
+        }
+        
+        //v3.setOrdenados(a1);
         v3.setFrase(frase2);
         v3.setVisible(true);
     }                                        
+
+    private void ingresadosActionPerformed(java.awt.event.ActionEvent evt) {                                           
+       
+        
+      
+    }                                          
+
+    private void rutaDocActionPerformed(java.awt.event.ActionEvent evt) {                                        
+        // TODO add your handling code here:
+    }                                       
+
 
     /**
      * @param args the command line arguments
@@ -253,9 +388,11 @@ public class Ventana1 extends javax.swing.JFrame {
     private javax.swing.JButton ingresar1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JPanel panel;
+    private javax.swing.JTextField rutaDoc;
     // End of variables declaration                   
 }

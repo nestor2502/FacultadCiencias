@@ -4,6 +4,12 @@
  * and open the template in the editor.
  */
 package Proyecto2;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+import src.*;
 
 import java.awt.Font;
 
@@ -13,6 +19,7 @@ import java.awt.Font;
  */
 public class Ventana2 extends javax.swing.JFrame {
     String ruta2 ="";
+    Lista <String> rutas;
 
     /**
      * Creates new form Ventana2
@@ -30,10 +37,17 @@ public class Ventana2 extends javax.swing.JFrame {
      TextPrompt placeholder = new TextPrompt("c :/. . . / . . . / . . . ", ruta);
      placeholder.changeAlpha(0.75f);
          placeholder.changeStyle(Font.ITALIC);
+         rutas = new Lista <String>();
     }
+    
+    
      
     public String getRuta(){
     return ruta2;
+    }
+    
+    public Lista<String> getRutas(){
+    return rutas;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -117,8 +131,12 @@ public class Ventana2 extends javax.swing.JFrame {
 
     private void añadirActionPerformed(java.awt.event.ActionEvent evt) {                                       
         // TODO add your handling code here:
+        
         ruta2 = ruta.getText();
+        rutas.agregaFinal(ruta2);
         ruta.setText("");
+        
+        
         
     }                                      
 

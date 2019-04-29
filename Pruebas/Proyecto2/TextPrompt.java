@@ -80,6 +80,7 @@ public class TextPrompt extends JLabel
 	 *
 	 *  @param alpha value in the range of 0 - 255.
 	 */
+	
 	public void changeAlpha(int alpha)
 	{
 		alpha = alpha > 255 ? 255 : alpha < 0 ? 0 : alpha;

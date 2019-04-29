@@ -16,9 +16,10 @@ public class Componente implements Comparable<Componente>{
      *Constructor que asigna un valor a palabra
      *@param palabra
      */
-     public void Componente(String palabra){
+     public Componente(String palabra){
 
      	 this.palabra = palabra;
+     	 veces_repetidas=1;
      }
 
     /**
@@ -27,7 +28,7 @@ public class Componente implements Comparable<Componente>{
     */
      public String getPalabra(){
 
-     	 return palabra
+     	 return palabra;
      }
 
      /**
@@ -54,9 +55,9 @@ public class Componente implements Comparable<Componente>{
 
 	 	   if(c == null)
 
-	 	   	throw new NullPointerException;
+	 	   	throw new NullPointerException();
 
-	 	   return palabra.compareTo(c);
+	 	   return palabra.compareTo(c.getPalabra());
 
 	 }
 
