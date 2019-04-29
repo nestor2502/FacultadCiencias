@@ -246,13 +246,17 @@ public class Ventana1 extends javax.swing.JFrame {
         frase.setEnabled(true);
         ingresar1.setEnabled(true);
         ingresados.removeAllItems();
+        rutas= new Lista<String>();
+        v3.reinicia();
         //seleccion = v4.getSeleccion();
         
     }                                        
 
-    private void documentoActionPerformed(java.awt.event.ActionEvent evt) {   
+    private void documentoActionPerformed(java.awt.event.ActionEvent evt) {
+
      String rutam = rutaDoc.getText().trim();                                       
         if(rutas.contiene(rutam)==false){
+            m2 = new ManejoDocumentos(frase2);
         //cont =0;
         if(rutaDoc.getText().equals("")==false ){//|| rutaDoc.getText()!= " "){
        // String rutam = rutaDoc.getText().trim();
@@ -279,7 +283,7 @@ public class Ventana1 extends javax.swing.JFrame {
     }                                         
     public void agregarDocumento(String documento){
          if(rutas.contiene(documento)==false){
-         m2.agregaDocumento(documento);
+         //m2.agregaDocumento(documento);
          rutas.agregaInicio(documento);
          ingresados.addItem(documento);
          rutaDoc.setText("");
@@ -322,6 +326,11 @@ public class Ventana1 extends javax.swing.JFrame {
     public void setSimilitud(){
         String [] a1= new String[0];;
         if(agrego==0 ){
+             Iterator <String> iterator = rutas.iterator();
+             while(iterator.hasNext()==true){
+
+                 m2.agregaDocumento(iterator.next());
+             }
              m2.calculaSimilitud();
              m2.ordenaDocumentos();
              m2.pruebaSim();

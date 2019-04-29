@@ -42,6 +42,7 @@ public class Ventana3 extends javax.swing.JFrame {
     
     frase2 = "";
     rutas = new Lista<String>();
+    jComboBox1.removeAllItems();
     }
 
     public void setOrdenados(String [] archivos){
