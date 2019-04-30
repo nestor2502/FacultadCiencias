@@ -38,7 +38,7 @@ public class ManipulaDocumento{
      	 //se inicia lista de arboles para cada documento
      	 cadenas = new Lista<ArbolRojinegro<Componente>>();
      	 //se inicia con 0
-         no_doc_termino = new int[frase.length];
+         no_doc_termino = new int[frase.length+1];
          //se inicia listra de numero de palabras
          no_palabras = new Lista <Integer>();
      	 //se inicia frecuancia_termino

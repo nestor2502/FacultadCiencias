@@ -82,7 +82,7 @@ public class CalcularSim{
      	 double sim=0;
      	 double similitud=0;
      	 double p1 = divide(1,no_palabras);
-     	 for(int i = 0 ; i< no_archivos; i++){
+     	 for(int i = 0 ; i< frecuencia_termino.length; i++){
      	 	 sim =sim+ getTF(frecuencia_termino[i])*getIDF(no_doc_termino[i]);
      	 }
      	 similitud = p1*sim;

@@ -52,10 +52,11 @@ public class Test{
 	 System.out.println("Prueba de lectura de archivos y si similitud");
 	 String [] frase2 = {"hola","como","estas","amigo"};
 	 ManejoDocumentos m2 = new ManejoDocumentos("hola como estas amigo");
-	 m2.agregaDocumento("/home/nestor2502/Escritorio/ejemplo1.txt");
-     //m2.agregaDocumento("/home/nestor2502/Escritorio/ejemplo2.txt");
-     m2.agregaDocumento("/home/nestor2502/Escritorio/ejemplo3.txt");
-     //m2.agregaDocumento("/home/nestor2502/Escritorio/ejemplo4.txt");
+	 m2.agregaDocumento("/home/nestor/Escritorio/ejemplo1.txt");
+      m2.agregaDocumento("/home/nestor/Escritorio/ejemplo2.txt");
+      m2.agregaDocumento("/home/nestor/Escritorio/ejemplo3.txt");
+      m2.agregaDocumento("/home/nestor/Escritorio/ejemplo4.txt");
+      m2.agregaDocumento("/home/nestor/Escritorio/ejemplo5.txt");
      m2.calculaSimilitud();
      m2.ordenaDocumentos();
      String [] ahoraSi = m2.getOrdenados();
